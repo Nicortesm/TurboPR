@@ -53,7 +53,7 @@ tool_selection = st.sidebar.radio(
     key="tool_selection"
 )
 st.sidebar.markdown("---")
-st.sidebar.info("Esta app utiliza GPT-4o. Los resultados son generados por IA y deben ser revisados por un profesional.")
+st.sidebar.info("Los resultados son generados por IA y deben ser revisados por un profesional.")
 
 
 # --- LÓGICA PARA CADA HERRAMIENTA ---
