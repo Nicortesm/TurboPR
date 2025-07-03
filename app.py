@@ -38,7 +38,7 @@ def call_gpt4o(prompt_text):
 # --- INTERFAZ DE USUARIO CON STREAMLIT ---
 
 st.title("🤖 Asistente de PR para Marcas")
-st.markdown("Herramientas inteligentes impulsadas por GPT-4o para potenciar tu comunicación.")
+st.markdown("Herramientas inteligentes impulsadas por IA para potenciar tu comunicación.")
 
 # --- BARRA LATERAL DE NAVEGACIÓN ---
 
@@ -58,7 +58,7 @@ st.sidebar.info("Esta app utiliza GPT-4o. Los resultados son generados por IA y 
 
 # --- LÓGICA PARA CADA HERRAMIENTA ---
 
-# Herramienta 1: Comunicados de Prensa
+# Herramienta 1: Comunicados de Prensa (CON EL TONO FIJO)
 if tool_selection == "📝 Redacción de Comunicados de Prensa":
     st.header("📝 Redactor de Comunicados de Prensa")
     st.markdown("Carga o pega información base y genera un comunicado de prensa profesional y listo para enviar.")
@@ -67,7 +67,7 @@ if tool_selection == "📝 Redacción de Comunicados de Prensa":
     
     with col1:
         st.subheader("1. Configuración")
-        tono = st.selectbox("Elige el tono:", ("Corporativo y formal", "Cercano y entusiasta", "Directo y noticioso", "Innovador y moderno"))
+        # --- CAMBIO: SE ELIMINÓ EL SELECTOR DE TONO ---
         enfoque_medio = st.selectbox("Enfocado a:", ("Medio generalista", "Medio especializado (ej. tecnología, finanzas)", "Revista de estilo de vida", "Blog de nicho"))
         
         st.subheader("2. Información Base")
@@ -88,15 +88,16 @@ if tool_selection == "📝 Redacción de Comunicados de Prensa":
             if not contexto_base.strip():
                 st.warning("Por favor, proporciona la información base para generar el comunicado.")
             else:
+                # --- CAMBIO: EL PROMPT AHORA TIENE EL TONO FIJO Y MÁS DETALLADO ---
                 prompt_comunicado = f"""
-                Actúa como un experto en relaciones públicas y comunicación corporativa con más de 20 años de experiencia trabajando con marcas de primer nivel. Tu tarea es redactar un comunicado de prensa profesional, claro, objetivo y bien estructurado.
+                Actúa como un experto en relaciones públicas y comunicación corporativa con más de 20 años de experiencia. Tu tarea es redactar un comunicado de prensa profesional, claro, objetivo y bien estructurado.
 
                 **Información Base Proporcionada:**
                 {contexto_base}
 
                 **Instrucciones de Tono y Enfoque:**
-                - **Tono del comunicado:** {tono}
-                - **Medio de destino:** {enfoque_medio}. Adapta el lenguaje, la profundidad técnica y los ángulos de interés a este tipo de medio.
+                - **Tono del comunicado:** El tono debe ser estrictamente formal, serio, profesional, periodístico e informativo. Evita por completo el lenguaje coloquial, entusiasta, subjetivo o de marketing. Céntrate en la objetividad, la precisión de los datos y la claridad de la información.
+                - **Medio de destino:** {enfoque_medio}. Adapta la profundidad técnica y los ángulos de interés a este tipo de medio, pero manteniendo siempre el tono formal.
 
                 **Estructura Obligatoria del Comunicado:**
                 1.  **TÍTULO:** Atractivo, conciso y que resuma la noticia principal. Menos de 15 palabras.
@@ -104,8 +105,8 @@ if tool_selection == "📝 Redacción de Comunicados de Prensa":
                 3.  **ENTRADILLA (LEAD):** Primer párrafo. Debe responder a las 6 Ws del periodismo (Quién, Qué, Cuándo, Dónde, Por qué y Cómo) de forma clara y directa. No más de 50 palabras.
                 4.  **CUERPO DEL COMUNICADO:**
                     - Desarrolla la información en orden de importancia (pirámide invertida).
-                    - Usa un lenguaje claro, preciso y libre de sesgos. Evita adjetivos subjetivos o frases editorializadas.
-                    - Incluye al menos una cita (quote) de un portavoz relevante. Si no se proporciona en la información base, crea una que sea coherente, potente y apropiada para el tono solicitado.
+                    - Usa un lenguaje preciso y libre de sesgos.
+                    - Incluye al menos una cita (quote) de un portavoz relevante. Si no se proporciona en la información base, crea una que sea coherente, potente y apropiada al tono formal y corporativo.
                     - Inserta 2-3 intertítulos relevantes y optimizados para SEO que organicen el contenido y faciliten la lectura.
                 5.  **ACERCA DE [Nombre de la Marca]:** Un párrafo estándar (boilerplate) describiendo la empresa. Si no se proporciona, indica "[INSERTAR BOILERPLATE DE LA EMPRESA AQUÍ]".
                 6.  **CONTACTO DE PRENSA:**
@@ -120,7 +121,7 @@ if tool_selection == "📝 Redacción de Comunicados de Prensa":
                     resultado = call_gpt4o(prompt_comunicado)
                     st.markdown(resultado)
 
-# Herramienta 2: Pitches
+# Herramienta 2: Pitches (sin cambios)
 elif tool_selection == "📲 Redacción de Pitches (Email/WhatsApp)":
     st.header("📲 Redactor de Pitches para Periodistas")
     st.markdown("Crea mensajes de presentación cortos y efectivos para captar la atención de periodistas por email o WhatsApp.")
@@ -176,7 +177,7 @@ elif tool_selection == "📲 Redacción de Pitches (Email/WhatsApp)":
                     resultado = call_gpt4o(prompt_pitch)
                     st.markdown(resultado)
 
-# Herramienta 3: Análisis de Temáticas
+# Herramienta 3: Análisis de Temáticas (sin cambios)
 elif tool_selection == "🧠 Análisis de Temáticas":
     st.header("🧠 Analizador de Temáticas para PR")
     st.markdown("Introduce un tema complejo y obtén un desglose estratégico: glosario, enfoques noticiosos y medios a los que proponerlo.")
